@@ -1,5 +1,6 @@
 import cats.effect._
 import cats.Monad
+import cats.syntax.all._
 
 import org.http4s._
 import org.http4s.dsl.io._
@@ -22,6 +23,8 @@ object Main extends IOApp {
 
     case GET -> Root / "person" =>
       Ok(testPerson.asJson(Person.PersonEncoder))
+
+    case req @ POST -> Root / "person" => checkBody[Person](req)
   }
 
   val service = helloWorldService
@@ -31,6 +34,20 @@ object Main extends IOApp {
       case "name" => f.pure("OK")
       case _      => f.pure("NOT OK")
     }
+
+  def checkBody[A](
+      req: Request[IO]
+  )(implicit decoder: EntityDecoder[IO, A]): IO[Response[IO]] =
+    req
+      .as[A]
+      .attempt
+      .map(result => {
+        result match {
+          case Left(error)  => InternalServerError(s"Error: $error")
+          case Right(value) => Ok(s"Good json: $value")
+        }
+      })
+      .flatten
 
   val httpApp = Router("/" -> helloWorldService, "/api" -> service).orNotFound
 

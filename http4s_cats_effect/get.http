@@ -15,3 +15,16 @@ POST  http://127.0.0.1:8000/check/name123
 GET  http://127.0.0.1:8000/person
 
 ###
+
+# sending json
+
+POST  http://127.0.0.1:8000/person
+
+{
+    "name": "Bob",
+    "age": 42,
+    "childrens": ["Alice"],
+    "spouse": "Ann"
+}
+
+###
