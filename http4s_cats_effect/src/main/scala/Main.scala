@@ -1,15 +1,17 @@
 import cats.effect._
+import cats.Monad
+
 import org.http4s._
 import org.http4s.dsl.io._
 import org.http4s.server.Router
-import cats.implicits._
-import org.http4s.implicits._
-import cats.syntax.all._
-import com.comcast.ip4s._
+import org.http4s.circe._
 import org.http4s.ember.server._
-import scala.concurrent.duration._
-import cats.syntax.all._
-import cats.Monad
+
+import com.comcast.ip4s._
+
+import Models.Models._
+
+import io.circe.syntax._
 
 object Main extends IOApp {
 
@@ -17,6 +19,9 @@ object Main extends IOApp {
     case GET -> Root / "hello" =>
       Ok("Hello world!")
     case POST -> Root / "check" / route => Ok(checkSome[IO](route))
+
+    case GET -> Root / "person" =>
+      Ok(testPerson.asJson(Person.PersonEncoder))
   }
 
   val service = helloWorldService
@@ -28,6 +33,8 @@ object Main extends IOApp {
     }
 
   val httpApp = Router("/" -> helloWorldService, "/api" -> service).orNotFound
+
+  val testPerson = Person("Bob", 42, List("Alex"), Some("Alice"))
 
   val server = EmberServerBuilder
     .default[IO]
