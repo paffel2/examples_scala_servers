@@ -10,9 +10,15 @@ POST  http://127.0.0.1:8000/check/name123
 
 ###
 
-#  get person
+#  get persons list
 
-GET  http://127.0.0.1:8000/person
+GET  http://127.0.0.1:8000/person?n=10
+
+###
+
+#  get person 
+
+GET  http://127.0.0.1:8000/person/4
 
 ###
 
@@ -20,11 +26,27 @@ GET  http://127.0.0.1:8000/person
 
 POST  http://127.0.0.1:8000/person
 
-{
-    "name": "Bob",
-    "age": 42,
-    "childrens": ["Alice"],
-    "spouse": "Ann"
+{   
+    "name": "Viktor",
+    "age": 77
 }
+
+###
+
+# update person
+
+PUT  http://127.0.0.1:8000/person
+
+{   
+    "id": 4,
+    "name": "Som",
+    "age": 2
+}
+
+###
+
+# update person
+
+DELETE  http://127.0.0.1:8000/person?id=4
 
 ###

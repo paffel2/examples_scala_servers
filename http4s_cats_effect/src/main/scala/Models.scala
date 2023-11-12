@@ -12,17 +12,23 @@ import org.http4s.EntityDecoder
 
 object Models {
 
-  case class Person(
-      name: String,
-      age: Int,
-      childrens: List[String],
-      spouse: Option[String]
+  class InputPerson(
+      val name: String,
+      val age: Int
   )
+
+  object InputPerson {
+    implicit val personDecoder: EntityDecoder[IO, InputPerson] =
+      jsonOf[IO, InputPerson]
+  }
+
+  case class Person(id: Int, override val name: String, override val age: Int)
+      extends InputPerson(name, age)
 
   object Person {
     implicit val PersonEncoder: Encoder[Person] =
       Encoder.instance { person: Person =>
-        json"""{"name": ${person.name}, "age": ${person.age}, "childrens": ${person.childrens}, "spose": ${person.spouse}}"""
+        json"""{"id": ${person.id}, "name": ${person.name}, "age": ${person.age}}"""
       }
 
     implicit val personDecoder: EntityDecoder[IO, Person] = jsonOf[IO, Person]
