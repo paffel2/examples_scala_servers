@@ -1,0 +1,52 @@
+#  get something
+
+GET  http://localhost:8000/hello
+
+###
+
+#  post something
+
+POST  http://127.0.0.1:8000/check/name123
+
+###
+
+#  get persons list
+
+GET  http://127.0.0.1:8000/person
+
+###
+
+#  get person 
+
+GET  http://127.0.0.1:8000/person/4
+
+###
+
+# sending json
+
+POST  http://127.0.0.1:8000/person
+
+{   
+    "name": "John",
+    "age": 77
+}
+
+###
+
+# update person
+
+PUT  http://127.0.0.1:8000/person
+
+{   
+    "id": 4,
+    "name": "Som",
+    "age": 2
+}
+
+###
+
+# update person
+
+DELETE  http://127.0.0.1:8000/person?id=4
+
+###
