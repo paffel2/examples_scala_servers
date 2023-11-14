@@ -20,6 +20,9 @@ object Models {
   object Person {
     implicit val encoder: JsonEncoder[Person] =
       DeriveJsonEncoder.gen[Person]
+
+    implicit val decoder: JsonDecoder[Person] =
+      DeriveJsonDecoder.gen[Person]
   }
 
 }

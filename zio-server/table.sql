@@ -1,0 +1,1 @@
+CREATE TABLE person (id SERIAL,name VARCHAR,age int)

@@ -18,7 +18,7 @@ GET  http://127.0.0.1:8000/person
 
 #  get person 
 
-GET  http://127.0.0.1:8000/person/4
+GET  http://127.0.0.1:8000/person/5
 
 ###
 
@@ -38,15 +38,15 @@ POST  http://127.0.0.1:8000/person
 PUT  http://127.0.0.1:8000/person
 
 {   
-    "id": 4,
-    "name": "Som",
-    "age": 2
+    "id": 6,
+    "name": "John",
+    "age": 27
 }
 
 ###
 
-# update person
+# delete person
 
-DELETE  http://127.0.0.1:8000/person?id=4
+DELETE  http://127.0.0.1:8000/person?id=5
 
 ###
