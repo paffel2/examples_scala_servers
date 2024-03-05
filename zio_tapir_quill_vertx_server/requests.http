@@ -1,0 +1,38 @@
+# post person
+
+POST http://127.0.0.1:8000/post?name=Alex&age=23
+
+###
+
+
+# get person list
+
+GET  http://127.0.0.1:8000/get/
+
+###
+
+# get person by id
+
+GET  http://127.0.0.1:8000/get_by_id/1/
+
+
+###
+
+# delete person by id
+
+DELETE http://127.0.0.1:8000/delete/2/
+
+
+###
+
+# update person
+
+PUT  http://127.0.0.1:8000/put/
+
+{
+    "id": 44,
+    "name": "Viktor",
+    "age": 77
+}
+
+###
